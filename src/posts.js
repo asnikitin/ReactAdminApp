@@ -17,9 +17,10 @@ export const PostList = props => (
           medium={
               <Datagrid>
                   <TextField source="id" />
-                  <ReferenceField label="User" source="userId" reference="users">
+                  {/* <ReferenceField label="User" source="userId" reference="users">
                       <TextField source="name" />
-                  </ReferenceField>
+                  </ReferenceField> */}
+                  <TextField source="userId" />
                   <TextField source="title" />
                   <TextField source="body" />
                   <EditButton />
@@ -50,9 +51,10 @@ export const PostEdit = props => (
      <Edit title={<PostTitle />} {...props}>
         <SimpleForm>
           <DisabledInput source="id" />
-            <ReferenceInput source="userId" reference="users">
+            {/* <ReferenceInput source="userId" reference="users">
              <SelectInput optionText="name" />
-            </ReferenceInput>
+            </ReferenceInput> */}
+            <TextField source="userId" />
             <TextInput source="title" />
          <LongTextInput source="body" />
         </SimpleForm>

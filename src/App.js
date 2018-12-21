@@ -17,26 +17,41 @@ import jsonServerProvider from 'ra-data-json-server';
 import simpleRestProvider from 'ra-data-simple-rest';
 import addUploadFeature from './addUploadFeature';
 
+import bitcoinSaga from './bitcoinSaga';
+
+
+import { createMuiTheme } from '@material-ui/core/styles';
+
+const theme = createMuiTheme({
+  palette: {
+    type: 'light', // Switching the dark mode on is a single property value change.
+  },
+});
+
+
+
 
 const httpClient = (url, options = {}) => {
     if (!options.headers) {
         options.headers = new Headers({ Accept: 'application/json' });
     }
-    if (!options.user) {
-              options.user = {
-             authenticated: true,
-             token: 'SRTRDFVESGNJYTUKTYTHRG'
-         }
-    }
+      const token = localStorage.getItem('token');
+      options.headers.set('Authorization', `Bearer ${token}`);
+
+    // if (!options.user) {
+    //           options.user = {
+    //          authenticated: true,
+    //          token: 'SRTRDFVESGNJYTUKTYTHRG'
+    //      }
+    // }
     // add your own headers here
-    options.headers.set('X-Custom-Header', 'foobar');
+    //options.headers.set('X-Custom-Header', 'foobar');
     return fetchUtils.fetchJson(url, options);
 }
 
 
 
-let link = 'http://localhost:3001/'
-link = 'http://jsonplaceholder.typicode.com'
+let link = 'http://localhost:3001'
 
 const dataProvider = jsonServerProvider(link, httpClient);
 const uploadCapableDataProvider = addUploadFeature(dataProvider);
@@ -44,7 +59,7 @@ const uploadCapableDataProvider = addUploadFeature(dataProvider);
 
 
 const App = () => (
-    <Admin dataProvider={uploadCapableDataProvider} dashboard={Dashboard} authProvider={authProvider}>
+    <Admin dataProvider={uploadCapableDataProvider} dashboard={Dashboard} customSagas={[ bitcoinSaga ]} theme={theme} authProvider={authProvider}>
         <Resource name="posts" list={PostList} edit={PostEdit} create={PostCreate} icon={PostIcon} />
         <Resource name="users" list={UserList} icon={UserIcon} />
     </Admin>
