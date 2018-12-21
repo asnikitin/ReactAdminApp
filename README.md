@@ -7,9 +7,9 @@ This project was bootstrapped with:
 
 ## First you must
 
-Use MongoDB to create a database "test" with 'user' and 'post' collections.
-Add entries based on corresponding models.
-Use.
+1. Use MongoDB to create a database "test" with 'user' and 'post' collections.
+2. Add entries based on corresponding models.
+3. Use.
 
 ## Available Scripts
 

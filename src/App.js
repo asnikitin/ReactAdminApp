@@ -7,11 +7,12 @@ import UserIcon from '@material-ui/icons/Group';
 import Dashboard from './Dashboard';
 import authProvider from './authProvider';
 
+import { fetchUtils } from 'react-admin';
+
 import { UserList } from './users';
 
 import jsonServerProvider from 'ra-data-json-server';
 
-<<<<<<< HEAD
 
 import simpleRestProvider from 'ra-data-simple-rest';
 import addUploadFeature from './addUploadFeature';
@@ -54,23 +55,14 @@ let link = 'http://localhost:3001'
 
 const dataProvider = jsonServerProvider(link, httpClient);
 const uploadCapableDataProvider = addUploadFeature(dataProvider);
-=======
-// const dataProvider = jsonServerProvider('http://jsonplaceholder.typicode.com');
-import dataProvider from './dataProvider';
->>>>>>> parent of 96ef567... v1.1.1
 
 
 
 const App = () => (
-<<<<<<< HEAD
     <Admin dataProvider={uploadCapableDataProvider} dashboard={Dashboard} customSagas={[ bitcoinSaga ]} theme={theme} authProvider={authProvider}>
-=======
-    <Admin dataProvider={dataProvider} dashboard={Dashboard} authProvider={authProvider}>
->>>>>>> parent of 96ef567... v1.1.1
         <Resource name="posts" list={PostList} edit={PostEdit} create={PostCreate} icon={PostIcon} />
         <Resource name="users" list={UserList} icon={UserIcon} />
     </Admin>
 );
-
 
 export default App;
