@@ -16,17 +16,10 @@ import jsonServerProvider from 'ra-data-json-server';
 
 import simpleRestProvider from 'ra-data-simple-rest';
 import addUploadFeature from './addUploadFeature';
+import Login from './Login';
 
-import bitcoinSaga from './bitcoinSaga';
 
-
-import { createMuiTheme } from '@material-ui/core/styles';
-
-const theme = createMuiTheme({
-  palette: {
-    type: 'light', // Switching the dark mode on is a single property value change.
-  },
-});
+import customRoutes from './customRoutes';
 
 
 
@@ -59,7 +52,7 @@ const uploadCapableDataProvider = addUploadFeature(dataProvider);
 
 
 const App = () => (
-    <Admin dataProvider={uploadCapableDataProvider} dashboard={Dashboard} customSagas={[ bitcoinSaga ]} theme={theme} authProvider={authProvider}>
+    <Admin customRoutes={customRoutes} dataProvider={uploadCapableDataProvider} dashboard={Dashboard} authProvider={authProvider} loginPage={Login}>
         <Resource name="posts" list={PostList} edit={PostEdit} create={PostCreate} icon={PostIcon} />
         <Resource name="users" list={UserList} icon={UserIcon} />
     </Admin>
