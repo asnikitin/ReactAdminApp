@@ -56,7 +56,11 @@ export const PostEdit = props => (
              <SelectInput optionText="name" />
             </ReferenceInput> */}
             <TextField source="userId" />
-            <ImageInput source="image" />
+
+            <ImageInput source="image" label="Related pictures" accept="image/*" placeholder={<p>Drop your file here</p>}>
+    <ImageField source="image" title="title" />
+</ImageInput>
+
             <TextInput source="title" />
          <LongTextInput source="body" />
         </SimpleForm>
@@ -70,7 +74,9 @@ export const PostCreate = props => (
             <ReferenceInput source="userId" reference="users">
                 <SelectInput optionText="name" />
             </ReferenceInput>
-            <ImageInput source="image" />
+            <ImageInput source="image" label="Related pictures" accept="image/*" placeholder={<p>Drop your file here</p>}>
+              <ImageField source="image" title="title" />
+          </ImageInput>
             <TextInput source="title" />
             <LongTextInput source="body" />
         </SimpleForm>
