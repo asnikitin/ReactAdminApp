@@ -86,9 +86,6 @@ export const PostCreate = props => (
               <ImageField source="images" title="Images" multiple />
           </ImageInput>
 
-          <FileInput source="files" label="Files" accept="image/*" multiple>
-            <FileField source="files" title="files" />
-          </FileInput>
 
           <ArrayInput source="backlinks">
               <SimpleFormIterator>
@@ -99,6 +96,25 @@ export const PostCreate = props => (
                 </ImageInput>
               </SimpleFormIterator>
           </ArrayInput>
+
+
+          <FileInput source="files" label="Files" accept="image/*" multiple>
+            <FileField source="files" title="files" />
+          </FileInput>
+
+          <ArrayInput source="forwardlinks">
+              <SimpleFormIterator>
+                  <TextInput source="name" />
+                  <ImageInput source="image" label="Image" accept="image/*" placeholder={<p>Drop your file here</p>}>
+                    <ImageField source="image" title="Image" />
+                </ImageInput>
+                <DateInput source="date" label="" />
+                <TextInput source="text" label="" />
+              </SimpleFormIterator>
+          </ArrayInput>
+
+
+
 
           <TextInput source="title" />
             <LongTextInput source="body" />
