@@ -58,13 +58,52 @@ export const PostEdit = props => (
             </ReferenceInput> */}
             <TextField source="userId" />
 
-            <ImageInput source="image" label="Related pictures" accept="image/*" placeholder={<p>Drop your file here</p>}>
-    <ImageField source="image" title="title" />
-</ImageInput>
 
-            <TextInput source="title" />
-         <LongTextInput source="body" />
-        </SimpleForm>
+                        <ImageInput source="image" label="Image" accept="image/*" placeholder={<p>Drop your file here</p>}>
+                          <ImageField source="image" title="Image" />
+                      </ImageInput>
+
+                        <ImageInput source="images" label="Images" accept="image/*" multiple placeholder={<p>Drop your file here</p>}>
+                          <ImageField source="images" title="Images" multiple />
+                      </ImageInput>
+
+
+                      <ArrayInput source="backlinks">
+                          <SimpleFormIterator>
+                              <DateInput source="date" />
+                              <TextInput source="url" />
+                              <ImageInput source="image" label="Image" accept="image/*" placeholder={<p>Drop your file here</p>}>
+                                <ImageField source="image" title="Image" />
+                            </ImageInput>
+                          </SimpleFormIterator>
+                      </ArrayInput>
+
+
+                      <FileInput source="files" label="Files" accept="image/*" multiple>
+                        <FileField source="files" title="files" />
+                      </FileInput>
+
+
+
+                      <ArrayInput source="forwardlinks">
+                          <SimpleFormIterator>
+                              <TextInput source="name" />
+                              <ImageInput source="image" label="Image" accept="image/*" placeholder={<p>Drop your file here</p>}>
+                                <ImageField source="image" title="Image" />
+                            </ImageInput>
+                            <DateInput source="date" label="" />
+                            <TextInput source="text" label="" />
+                          </SimpleFormIterator>
+                      </ArrayInput>
+
+
+
+
+                      <TextInput source="title" />
+                        <LongTextInput source="body" />
+                      </SimpleForm>
+
+
     </Edit>
 );
 
@@ -101,6 +140,8 @@ export const PostCreate = props => (
           <FileInput source="files" label="Files" accept="image/*" multiple>
             <FileField source="files" title="files" />
           </FileInput>
+
+
 
           <ArrayInput source="forwardlinks">
               <SimpleFormIterator>
