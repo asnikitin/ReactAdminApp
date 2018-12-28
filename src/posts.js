@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, Datagrid, TextField, ReferenceField, EditButton, Edit, SimpleForm, DisabledInput, SelectInput, TextInput, LongTextInput, ReferenceInput , Create , Filter, Responsive, SimpleList} from 'react-admin';
+import { List, Datagrid, ImageField, ImageInput, TextField, ReferenceField, EditButton, Edit, SimpleForm, DisabledInput, SelectInput, TextInput, LongTextInput, ReferenceInput , Create , Filter, Responsive, SimpleList} from 'react-admin';
 
 
 
@@ -21,6 +21,7 @@ export const PostList = props => (
                       <TextField source="name" />
                   </ReferenceField> */}
                   <TextField source="userId" />
+                  <ImageField source="image" />
                   <TextField source="title" />
                   <TextField source="body" />
                   <EditButton />
@@ -55,6 +56,7 @@ export const PostEdit = props => (
              <SelectInput optionText="name" />
             </ReferenceInput> */}
             <TextField source="userId" />
+            <ImageInput source="image" />
             <TextInput source="title" />
          <LongTextInput source="body" />
         </SimpleForm>
@@ -68,6 +70,7 @@ export const PostCreate = props => (
             <ReferenceInput source="userId" reference="users">
                 <SelectInput optionText="name" />
             </ReferenceInput>
+            <ImageInput source="image" />
             <TextInput source="title" />
             <LongTextInput source="body" />
         </SimpleForm>
