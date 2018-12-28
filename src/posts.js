@@ -1,6 +1,7 @@
 import React from 'react';
-import { List, Datagrid, ImageField, ImageInput, TextField, ReferenceField, EditButton, Edit, SimpleForm, DisabledInput, SelectInput, TextInput, LongTextInput, ReferenceInput , Create , Filter, Responsive, SimpleList} from 'react-admin';
-
+import { List, Datagrid, ImageField, ImageInput, FileInput, FileField, TextField, ReferenceField, EditButton, Edit, SimpleForm, DisabledInput, SelectInput, TextInput, LongTextInput, ReferenceInput , Create , Filter, Responsive, SimpleList} from 'react-admin';
+import { ArrayInput, SimpleFormIterator, DateInput} from 'react-admin';
+import { AutocompleteInput } from 'react-admin';
 
 
 
@@ -71,14 +72,38 @@ export const PostEdit = props => (
 export const PostCreate = props => (
     <Create {...props}>
         <SimpleForm>
+
+
             <ReferenceInput source="userId" reference="users">
                 <SelectInput optionText="name" />
             </ReferenceInput>
-            <ImageInput source="image" label="Related pictures" accept="image/*" placeholder={<p>Drop your file here</p>}>
-              <ImageField source="image" title="title" />
+
+            <ImageInput source="image" label="Image" accept="image/*" placeholder={<p>Drop your file here</p>}>
+              <ImageField source="image" title="Image" />
           </ImageInput>
-            <TextInput source="title" />
+
+            <ImageInput source="images" label="Images" accept="image/*" multiple placeholder={<p>Drop your file here</p>}>
+              <ImageField source="images" title="Images" multiple />
+          </ImageInput>
+
+          <FileInput source="files" label="Files" accept="image/*" multiple>
+            <FileField source="files" title="files" />
+          </FileInput>
+
+          <ArrayInput source="backlinks">
+              <SimpleFormIterator>
+                  <DateInput source="date" />
+                  <TextInput source="url" />
+                  <ImageInput source="image" label="Image" accept="image/*" placeholder={<p>Drop your file here</p>}>
+                    <ImageField source="image" title="Image" />
+                </ImageInput>
+              </SimpleFormIterator>
+          </ArrayInput>
+
+          <TextInput source="title" />
             <LongTextInput source="body" />
-        </SimpleForm>
+          </SimpleForm>
+
+
     </Create>
 );
