@@ -59,49 +59,15 @@ export const PostEdit = props => (
             <TextField source="userId" />
 
 
-                        <ImageInput source="image" label="Image" accept="image/*" placeholder={<p>Drop your file here</p>}>
-                          <ImageField source="image" title="Image" />
-                      </ImageInput>
-
-                        <ImageInput source="images" label="Images" accept="image/*" multiple placeholder={<p>Drop your file here</p>}>
-                          <ImageField source="images" title="Images" multiple />
-                      </ImageInput>
-
-
-                      <ArrayInput source="backlinks">
-                          <SimpleFormIterator>
-                              <DateInput source="date" />
-                              <TextInput source="url" />
-                              <ImageInput source="image" label="Image" accept="image/*" placeholder={<p>Drop your file here</p>}>
-                                <ImageField source="image" title="Image" />
-                            </ImageInput>
-                          </SimpleFormIterator>
-                      </ArrayInput>
-
-
-                      <FileInput source="files" label="Files" accept="image/*" multiple>
-                        <FileField source="files" title="files" />
-                      </FileInput>
+            <ImageInput source="image" label="Image" accept="image/*" placeholder={<p>Drop your file here</p>}>
+              <ImageField source="image" title="Image" />
+          </ImageInput>
 
 
 
-                      <ArrayInput source="forwardlinks">
-                          <SimpleFormIterator>
-                              <TextInput source="name" />
-                              <ImageInput source="image" label="Image" accept="image/*" placeholder={<p>Drop your file here</p>}>
-                                <ImageField source="image" title="Image" />
-                            </ImageInput>
-                            <DateInput source="date" label="" />
-                            <TextInput source="text" label="" />
-                          </SimpleFormIterator>
-                      </ArrayInput>
-
-
-
-
-                      <TextInput source="title" />
-                        <LongTextInput source="body" />
-                      </SimpleForm>
+          <TextInput source="title" />
+            <LongTextInput source="body" />
+          </SimpleForm>
 
 
     </Edit>
@@ -112,21 +78,35 @@ export const PostCreate = props => (
     <Create {...props}>
         <SimpleForm>
 
-
+{console.log(props)}
             <ReferenceInput source="userId" reference="users">
                 <SelectInput optionText="name" />
             </ReferenceInput>
 
-            <ImageInput source="image" label="Image" accept="image/*" placeholder={<p>Drop your file here</p>}>
-              <ImageField source="image" title="Image" />
-          </ImageInput>
-
-            <ImageInput source="images" label="Images" accept="image/*" multiple placeholder={<p>Drop your file here</p>}>
-              <ImageField source="images" title="Images" multiple />
-          </ImageInput>
 
 
-          <ArrayInput source="backlinks">
+
+          <ArrayInput source="posts">
+              <SimpleFormIterator>
+                  <DateInput source="date" />
+                  <TextInput source="url" />
+                  <ImageInput source="image" label="Image" accept="image/*" placeholder={<p>Drop your file here</p>}>
+                    <ImageField source="image" title="Image" />
+                </ImageInput>
+              </SimpleFormIterator>
+          </ArrayInput>
+
+          <ArrayInput source="comments">
+              <SimpleFormIterator>
+                  <DateInput source="date" />
+                  <TextInput source="url" />
+                  <ImageInput source="image" label="Image" accept="image/*" placeholder={<p>Drop your file here</p>}>
+                    <ImageField source="image" title="Image" />
+                </ImageInput>
+              </SimpleFormIterator>
+          </ArrayInput>
+
+          <ArrayInput source="settings">
               <SimpleFormIterator>
                   <DateInput source="date" />
                   <TextInput source="url" />

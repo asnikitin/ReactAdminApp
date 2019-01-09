@@ -16,10 +16,18 @@ const convertFileToBase64 = file => new Promise((resolve, reject) => {
  * the `picture` sent property, with `src` and `title` attributes.
  */
 const addUploadFeature = requestHandler => (type, resource, params) => {
-    if (type === 'UPDATE' && resource === 'posts') {
+    if (type === 'UPDATE' || type === 'CREATE' && resource === 'posts') {
         // notice that following condition can be true only when `<ImageInput source="pictures" />` component has parameter `multiple={true}`
         // if parameter `multiple` is false, then data.pictures is not an array, but single object
+
+        console.log(params.data);
+        console.log(resource);
+
+
         if (params.data.pictures && params.data.pictures.length) {
+
+          console.log("Inside the base64 images converts");
+
             // only freshly dropped pictures are instance of File
             const formerPictures = params.data.pictures.filter(p => !(p.rawFile instanceof File));
             const newPictures = params.data.pictures.filter(p => p.rawFile instanceof File);
@@ -37,6 +45,10 @@ const addUploadFeature = requestHandler => (type, resource, params) => {
                     },
                 }));
         }
+
+
+
+
     }
     // for other request types and resources, fall back to the default request handler
     return requestHandler(type, resource, params);

@@ -4,7 +4,18 @@ import { Admin, Resource } from 'react-admin';
 import { PostList, PostEdit, PostCreate } from './posts';
 import PostIcon from '@material-ui/icons/Book';
 import UserIcon from '@material-ui/icons/Group';
+import SettingsIcon from '@material-ui/icons/Settings';
+import AnalyticsIcon from '@material-ui/icons/PieChart';
+import CommentsIcon from '@material-ui/icons/Comment';
+import HistoryIcon from '@material-ui/icons/History';
+import ProductIcon from '@material-ui/icons/ShoppingBasket';
+import TasksIcon from '@material-ui/icons/ViewList';
+import PageIcon from '@material-ui/icons/Note';
+import PieIcon from '@material-ui/icons/Power';
+import PhotoIcon from '@material-ui/icons/ViewCarousel';
 import Dashboard from './Dashboard';
+
+
 import authProvider from './authProvider';
 
 import { fetchUtils } from 'react-admin';
@@ -53,8 +64,15 @@ const uploadCapableDataProvider = addUploadFeature(dataProvider);
 
 const App = () => (
     <Admin customRoutes={customRoutes} dataProvider={uploadCapableDataProvider} dashboard={Dashboard} authProvider={authProvider} loginPage={Login}>
+        <Resource name="media" list={PostList} edit={PostEdit} create={PostCreate} icon={PhotoIcon} />
+        <Resource name="pages" list={PostList} edit={PostEdit} create={PostCreate} icon={PageIcon} />
         <Resource name="posts" list={PostList} edit={PostEdit} create={PostCreate} icon={PostIcon} />
         <Resource name="users" list={UserList} icon={UserIcon} />
+        <Resource name="comments" list={UserList} icon={CommentsIcon} />
+        <Resource name="products" list={UserList} icon={ProductIcon} />
+        <Resource name="tasks" list={UserList} icon={TasksIcon} />
+        <Resource name="analytics" list={UserList} icon={AnalyticsIcon} />
+        <Resource name="settings" list={UserList} icon={SettingsIcon} />
     </Admin>
 );
 
