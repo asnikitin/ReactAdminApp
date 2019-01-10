@@ -17,14 +17,14 @@ export const PostList = props => (
           }
           medium={
               <Datagrid>
-                  <TextField source="id" />
-                  {/* <ReferenceField label="User" source="userId" reference="users">
-                      <TextField source="name" />
-                  </ReferenceField> */}
-                  <TextField source="userId" />
                   <ImageField source="image" />
                   <TextField source="title" />
                   <TextField source="body" />
+                  <TextField source="category" />
+                  { <ReferenceField label="User" source="userId" reference="users">
+                      <TextField source="name" />
+                  </ReferenceField> }
+                  <TextField source="id" />
                   <EditButton />
               </Datagrid>
           }
@@ -56,19 +56,19 @@ export const PostEdit = props => (
             {/* <ReferenceInput source="userId" reference="users">
              <SelectInput optionText="name" />
             </ReferenceInput> */}
-            <TextField source="userId" />
-
 
             <ImageInput source="image" label="Image" accept="image/*" placeholder={<p>Drop your file here</p>}>
               <ImageField source="image" title="Image" />
-          </ImageInput>
-
-
-
-          <TextInput source="title" />
+            </ImageInput>
+            <ImageInput source="gallery" label="Gallery" accept="image/*" multiple={true} placeholder={<p>Drop your file here</p>}>
+              <ImageField source="gallery" title="Gallery" />
+            </ImageInput>
+            <TextInput source="title" />
             <LongTextInput source="body" />
-          </SimpleForm>
+            <TextInput source="category" />
+            <TextField source="userId" label="author"/>
 
+          </SimpleForm>
 
     </Edit>
 );
@@ -78,67 +78,27 @@ export const PostCreate = props => (
     <Create {...props}>
         <SimpleForm>
 
-{console.log(props)}
-            <ReferenceInput source="userId" reference="users">
+          {console.log(props)}
+
+
+            <ImageInput source="image" label="Image" accept="image/*" placeholder={<p>Drop your file here</p>}>
+              <ImageField source="image" title="Image" />
+            </ImageInput>
+
+            <ImageInput source="gallery" label="Gallery" accept="image/*" multiple={true} placeholder={<p>Drop your file here</p>}>
+              <ImageField source="gallery" title="Gallery" />
+            </ImageInput>
+
+            <TextInput source="title" />
+            <LongTextInput source="body" />
+            <TextInput source="category" />
+
+            <ReferenceInput source="userId" reference="users" label="author">
                 <SelectInput optionText="name" />
             </ReferenceInput>
 
 
 
-
-          <ArrayInput source="posts">
-              <SimpleFormIterator>
-                  <DateInput source="date" />
-                  <TextInput source="url" />
-                  <ImageInput source="image" label="Image" accept="image/*" placeholder={<p>Drop your file here</p>}>
-                    <ImageField source="image" title="Image" />
-                </ImageInput>
-              </SimpleFormIterator>
-          </ArrayInput>
-
-          <ArrayInput source="comments">
-              <SimpleFormIterator>
-                  <DateInput source="date" />
-                  <TextInput source="url" />
-                  <ImageInput source="image" label="Image" accept="image/*" placeholder={<p>Drop your file here</p>}>
-                    <ImageField source="image" title="Image" />
-                </ImageInput>
-              </SimpleFormIterator>
-          </ArrayInput>
-
-          <ArrayInput source="settings">
-              <SimpleFormIterator>
-                  <DateInput source="date" />
-                  <TextInput source="url" />
-                  <ImageInput source="image" label="Image" accept="image/*" placeholder={<p>Drop your file here</p>}>
-                    <ImageField source="image" title="Image" />
-                </ImageInput>
-              </SimpleFormIterator>
-          </ArrayInput>
-
-
-          <FileInput source="files" label="Files" accept="image/*" multiple>
-            <FileField source="files" title="files" />
-          </FileInput>
-
-
-
-          <ArrayInput source="forwardlinks">
-              <SimpleFormIterator>
-                  <TextInput source="name" />
-                  <ImageInput source="image" label="Image" accept="image/*" placeholder={<p>Drop your file here</p>}>
-                    <ImageField source="image" title="Image" />
-                </ImageInput>
-                <DateInput source="date" label="" />
-                <TextInput source="text" label="" />
-              </SimpleFormIterator>
-          </ArrayInput>
-
-
-
-
-          <TextInput source="title" />
-            <LongTextInput source="body" />
           </SimpleForm>
 
 

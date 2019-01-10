@@ -1,3 +1,27 @@
+const callApi = async (files) => {
+
+
+  const formData = new FormData()
+formData.append('files', files)
+
+
+  var fetchConf = { method: 'POST',
+                headers: {
+  "Content-Type": 'multipart/form-data'   },
+   body: formData,
+   dody: '232323',
+
+               cache: 'default' };
+
+               console.log("Attempting to send fetchConf", fetchConf);
+
+   const response = await fetch('http://localhost:3001/upload', fetchConf);
+const body = await response;  console.log("response", response);
+if (response.status !== 200) throw Error(body.message);
+ return body; };
+
+
+
 /**
  * Convert a `File` object returned by the upload input into a base 64 string.
  * That's not the most optimized way to store images in production, but it's
@@ -20,30 +44,24 @@ const addUploadFeature = requestHandler => (type, resource, params) => {
         // notice that following condition can be true only when `<ImageInput source="pictures" />` component has parameter `multiple={true}`
         // if parameter `multiple` is false, then data.pictures is not an array, but single object
 
-        console.log(params.data);
-        console.log(resource);
 
+        if (params.data.gallery && params.data.gallery.length) {
 
-        if (params.data.pictures && params.data.pictures.length) {
+            const formerPictures = params.data.gallery.filter(p => !(p.rawFile instanceof File));
+            const newPictures = params.data.gallery.filter(p => p.rawFile instanceof File);
 
-          console.log("Inside the base64 images converts");
+            //  now we need to send a fetch ({ newPictures}) to upload
 
-            // only freshly dropped pictures are instance of File
-            const formerPictures = params.data.pictures.filter(p => !(p.rawFile instanceof File));
-            const newPictures = params.data.pictures.filter(p => p.rawFile instanceof File);
-
-            return Promise.all(newPictures.map(convertFileToBase64))
-                .then(base64Pictures => base64Pictures.map((picture64, index) => ({
-                    src: picture64,
-                    title: `${newPictures[index].title}`,
-                })))
-                .then(transformedNewPictures => requestHandler(type, resource, {
-                    ...params,
-                    data: {
-                        ...params.data,
-                        pictures: [...transformedNewPictures, ...formerPictures],
-                    },
-                }));
+console.log(newPictures[0] instanceof File);
+console.log(newPictures[0].rawFile instanceof File);
+            return Promise.all(callApi(params.data.gallery).then(body  => console.log('body inpromise')))
+                // .then(transformedNewPictures => requestHandler(type, resource, {
+                //     ...params,
+                //     data: {
+                //         ...params.data,
+                //         gallery: [...transformedNewPictures, ...formerPictures],
+                //     },
+                // }));
         }
 
 
