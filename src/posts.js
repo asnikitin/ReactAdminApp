@@ -57,9 +57,6 @@ export const PostEdit = props => (
              <SelectInput optionText="name" />
             </ReferenceInput> */}
 
-            <ImageInput source="image" label="Image" accept="image/*" placeholder={<p>Drop your file here</p>}>
-              <ImageField source="image" title="Image" />
-            </ImageInput>
             <ImageInput source="gallery" label="Gallery" accept="image/*" multiple={true} placeholder={<p>Drop your file here</p>}>
               <ImageField source="gallery" title="Gallery" />
             </ImageInput>
@@ -93,20 +90,14 @@ if (response.status !== 200) console.log(body);
 
 
 const handleImageChange = (e) => {
-
-
      e.preventDefault();
 
      let reader = new FileReader();
-
-     console.log(e.length);
      let file = e.rawFile;
 
 
-     // const newPictures = e.filter(p => p.rawFile instanceof File);
-
      reader.onloadend = () => {
-return callApi(file)
+// return callApi(file)
      }
 
      reader.readAsDataURL(file)
@@ -120,14 +111,11 @@ export const PostCreate = props => (
     <Create {...props}>
         <SimpleForm>
 
-          {console.log(props)}
+          { /* console.log(props) */ }
 
 
-            <ImageInput onChange={(e) => handleImageChange(e)}  source="image" label="Image" accept="image/*" placeholder={<p>Drop your file here</p>}>
-              <ImageField source="image" title="Image" />
-            </ImageInput>
 
-            <ImageInput onChange={(e) => handleImageChange(e)}  source="gallery" label="Gallery" accept="image/*" multiple={true} placeholder={<p>Drop your file here</p>}>
+            <ImageInput source="gallery" label="Gallery" accept="image/*" multiple={true} placeholder={<p>Drop your file here</p>}>
               <ImageField source="gallery" title="Gallery" />
             </ImageInput>
 
