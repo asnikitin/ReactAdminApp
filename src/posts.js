@@ -74,18 +74,60 @@ export const PostEdit = props => (
 );
 
 
+
+const callApi = async (data) => {
+
+  let dat = new FormData();
+    dat.append('image', data);
+    dat.append('name', "Imagname");
+
+  var fetchConf = { method: 'POST',
+   files: dat,
+   body: dat,
+   cache: 'default' };
+   const response = await fetch('http://localhost:3001/upload', fetchConf);
+const body = await response;  console.log("response", response);
+if (response.status !== 200) console.log(body);
+ return body; };
+
+
+
+const handleImageChange = (e) => {
+
+
+     e.preventDefault();
+
+     let reader = new FileReader();
+
+     console.log(e.length);
+     let file = e.rawFile;
+
+
+     // const newPictures = e.filter(p => p.rawFile instanceof File);
+
+     reader.onloadend = () => {
+return callApi(file)
+     }
+
+     reader.readAsDataURL(file)
+ }
+
 export const PostCreate = props => (
+
+
+
+
     <Create {...props}>
         <SimpleForm>
 
           {console.log(props)}
 
 
-            <ImageInput source="image" label="Image" accept="image/*" placeholder={<p>Drop your file here</p>}>
+            <ImageInput onChange={(e) => handleImageChange(e)}  source="image" label="Image" accept="image/*" placeholder={<p>Drop your file here</p>}>
               <ImageField source="image" title="Image" />
             </ImageInput>
 
-            <ImageInput source="gallery" label="Gallery" accept="image/*" multiple={true} placeholder={<p>Drop your file here</p>}>
+            <ImageInput onChange={(e) => handleImageChange(e)}  source="gallery" label="Gallery" accept="image/*" multiple={true} placeholder={<p>Drop your file here</p>}>
               <ImageField source="gallery" title="Gallery" />
             </ImageInput>
 
