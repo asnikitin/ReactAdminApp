@@ -13,7 +13,7 @@ const callApi = async (name, file) => {
    body: dat,
    cache: 'default' };
    const response = await fetch('http://localhost:3001/upload', fetchConf);
-const body = await response;
+  const body = await response.json();
 console.log(body);
 if (response.status !== 200) console.log('Error' , body);
  return body; };
@@ -27,10 +27,10 @@ if (response.status !== 200) console.log('Error' , body);
  */
 const send_file_to_api = file => new Promise((resolve, reject) => {
     const reader = new FileReader();
-    reader.readAsDataURL(file.rawFile);
     // reader.onload = () => resolve(callApi(file.Gallery, reader.result));
     reader.onload = () => resolve(callApi(file.Gallery, file.rawFile));
     reader.onerror = reject;
+    reader.readAsDataURL(file.rawFile);
 });
 
 /**
@@ -53,7 +53,7 @@ const addUploadFeature = requestHandler => (type, resource, params) => {
 
             return Promise.all(newPictures.map(send_file_to_api))
                 .then(resolved_images => resolved_images.map((src, index) => ({
-                    src: src,
+                    src: src.images,
                     title: `${newPictures[index].title}`,
                 })))
                 .then(transformedNewPictures => requestHandler(type, resource, {
